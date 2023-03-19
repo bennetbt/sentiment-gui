@@ -12,9 +12,10 @@
 <body>
     <h1>Sentiment Analyzer</h1>
     <textarea id="textInput" rows="4" cols="50" placeholder="Type your text here..."></textarea>
-    <button id="analyzeButton">Analyze Sentiment</button>
+    <button id="analyzeButton">Classify Text</button>
     <div id="result" class="result"></div>
-
+    <button id="deleteButton">DELETE</button>
+    <textarea id="sentimentbox" rows="4" cols="50" placeholder="result"></textarea>
     <script>
         $(document).ready(function() {
             $("#analyzeButton").click(function() {
@@ -25,5 +26,6 @@
             });
         });
     </script>
+
 </body>
 </html>
