@@ -1,4 +1,4 @@
-﻿@page "/fetchdata"
+﻿@page "/"
 @using SentimentAnalysis.Data
 @inject SentimentAnalysisService SentimentService
 
@@ -8,6 +8,11 @@
 
 <p>Enter text into the first text box to classify it based on the estimated sentiment</p>
 
+<div id="inputSection"></div>
+<textarea id="sentimentInput" rows="4" cols="50" placeholder="Type your text here..."></textarea>
+<button class="btn btn-primary" @onclick="ClassifyTextSentiment">Classify Text</button>
+
+<div id="sentimentOutputSection"></div>
 @if (sentiments == null)
 {
     <p><em>Loading...</em></p>
@@ -34,12 +39,24 @@ else
         </tbody>
     </table>
 }
+<button class="btn btn-primary" @onclick="DeleteSentiment">Delete Sentiment</button>
+
 
 @code {
     private SentimentSet[]? sentiments;
 
-    protected override async Task OnInitializedAsync()
+    private void ClassifyTextSentiment()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateOnly.FromDateTime(DateTime.Now));
+
     }
+
+    private void DeleteSentiment()
+    {
+        
+    }
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    forecasts = await ForecastService.GetForecastAsync(DateOnly.FromDateTime(DateTime.Now));
+    //}
 }
