@@ -1,0 +1,45 @@
+﻿@page "/fetchdata"
+@using SentimentAnalysis.Data
+@inject SentimentAnalysisService SentimentService
+
+<PageTitle>Sentiment Analysis</PageTitle>
+
+<h1>Sentiment Analysis</h1>
+
+<p>Enter text into the first text box to classify it based on the estimated sentiment</p>
+
+@if (sentiments == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Text</th>
+                <th>Sentiment</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sentiment in sentiments)
+            {
+                <tr>
+                    <td>@sentiment.Text</td>
+                    <td>@sentiment.Sentiment</td>
+                    <td>@sentiment.Score</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private SentimentSet[]? sentiments;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await ForecastService.GetForecastAsync(DateOnly.FromDateTime(DateTime.Now));
+    }
+}
