@@ -1,13 +1,10 @@
-from flask import Flask, render_template, request
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-
 app = Flask(__name__)
 analyzer = SentimentIntensityAnalyzer()
 
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    return render_template('index.html')
 
 
 @app.route('/analyze', methods=['POST'])
@@ -33,4 +30,3 @@ def analyze_sentiment(text):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
