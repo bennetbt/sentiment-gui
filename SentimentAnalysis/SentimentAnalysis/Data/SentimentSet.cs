@@ -1,11 +1,17 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace SentimentAnalysis.Data
 {
     public class SentimentSet
     {
-        public string Text { get; set; }
+        [JsonPropertyName("text")]
+        public string? Text { get; set; }
 
-        public string Sentiment { get; set; }
+        [JsonPropertyName("sentiment")]
+        public string? Sentiment { get; set; }
 
-        public double Score { get; set; }
+        [JsonPropertyName("value")]
+        public double Value { get; set; }
     }
 }

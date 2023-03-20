@@ -1,5 +1,8 @@
 ﻿@page "/"
 @using SentimentAnalysis.Data
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@inject IHttpClientFactory ClientFactory
 @inject SentimentAnalysisService SentimentService
 
 <PageTitle>Sentiment Analysis</PageTitle>
@@ -24,7 +27,7 @@ else
             <tr>
                 <th>Text</th>
                 <th>Sentiment</th>
-                <th>Score</th>
+                <th>Value</th>
             </tr>
         </thead>
         <tbody>
@@ -33,7 +36,7 @@ else
                 <tr>
                     <td>@sentiment.Text</td>
                     <td>@sentiment.Sentiment</td>
-                    <td>@sentiment.Score</td>
+                    <td>@sentiment.Value</td>
                 </tr>
             }
         </tbody>
@@ -43,11 +46,39 @@ else
 
 
 @code {
-    private SentimentSet[]? sentiments;
+    private List<SentimentSet>? sentiments = null;
+    SentimentSet? sentiment;
+    private bool getSentimentsError;
+    private bool sentimentsLive = false;
 
-    private void ClassifyTextSentiment()
+    protected async Task ClassifyTextSentiment()
     {
+        var request = new HttpRequestMessage(HttpMethod.Get, "http://127.0.0.1:8000");
+        request.Headers.Add("Accept", "application/json");
 
+        var client = ClientFactory.CreateClient();
+
+        var response = await client.SendAsync(request);
+
+        if (response.IsSuccessStatusCode)
+        {
+            if (!sentimentsLive)
+            {
+                sentiments = new List<SentimentSet>();
+            }
+            var responseStream = await response.Content.ReadAsStringAsync();
+            string reString = responseStream.Replace(@"\", String.Empty);
+            reString = reString.Remove(0, 1);
+            reString = reString.Remove(reString.Length - 1, 1);
+            //reString = @"{""text"": ""This is the default sentence"", ""sentiment"": ""Neutral"", ""value"": 0.755}";
+            sentiment = JsonSerializer.Deserialize<SentimentSet>(reString);
+            sentiments.Add(sentiment);
+            sentimentsLive = true;
+        }
+        else
+        {
+            getSentimentsError = true;
+        }
     }
 
     private void DeleteSentiment()
