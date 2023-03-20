@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "8WGWgWTqQAMT7c/pLBYOIW/P23fBQSeaybXUxIpSWA/Kh0cbxfYq7RFe2YLUP6Vpw8lLW82sW5O2JWDvG/8d/w==",
+  "success": true,
+  "projectFilePath": "E:\\ETSU\\Grad\\CSCI\\5400 - Software Production\\Projects\\Deliverable 2\\sentiment-gui\\SentimentAnalysis\\SentimentAnalysis\\SentimentAnalysis.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\darie\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512"
+  ],
+  "logs": []
+}
