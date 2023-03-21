@@ -30,3 +30,5 @@ E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gu
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\SentimentAnalysis.pdb
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\SentimentAnalysis.genruntimeconfig.cache
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\ref\SentimentAnalysis.dll
+E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\bin\Debug\net7.0\Npgsql.dll
+E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\SentimentAnalysis.csproj.CopyComplete
