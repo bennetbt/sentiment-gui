@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  sentiment_gui:
+    image: evenwood/sentiment_gui:latest
+    ports:
+      - "5000:80"
+
+  sentiment_analyzer:
+    image: evenwood/sentiment_analyzer:latest
+    ports:
+      - "5001:8000"
+  db:
+    image: evenwood/sentiment_db:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
