@@ -6,6 +6,8 @@ E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gu
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\bin\Debug\net7.0\SentimentAnalysis.runtimeconfig.json
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\bin\Debug\net7.0\SentimentAnalysis.dll
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\bin\Debug\net7.0\SentimentAnalysis.pdb
+E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\bin\Debug\net7.0\Npgsql.dll
+E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\bin\Debug\net7.0\nunit.framework.dll
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\SentimentAnalysis.csproj.AssemblyReference.cache
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\SentimentAnalysis.GeneratedMSBuildEditorConfig.editorconfig
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\SentimentAnalysis.AssemblyInfoInputs.cache
@@ -25,10 +27,10 @@ E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gu
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\scopedcss\bundle\SentimentAnalysis.styles.css
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\scopedcss\projectbundle\SentimentAnalysis.bundle.scp.css
+E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\SentimentAnalysis.csproj.CopyComplete
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\SentimentAnalysis.dll
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\refint\SentimentAnalysis.dll
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\SentimentAnalysis.pdb
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\SentimentAnalysis.genruntimeconfig.cache
 E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\ref\SentimentAnalysis.dll
-E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\bin\Debug\net7.0\Npgsql.dll
-E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\obj\Debug\net7.0\SentimentAnalysis.csproj.CopyComplete
+E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentAnalysis\bin\Debug\net7.0\RichardSzalay.MockHttp.dll

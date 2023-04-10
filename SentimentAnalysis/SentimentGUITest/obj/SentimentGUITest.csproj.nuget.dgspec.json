@@ -46,7 +46,7 @@
           "dependencies": {
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
-              "version": "[1.17.0, )"
+              "version": "[1.18.1, )"
             },
             "NUnit": {
               "target": "Package",
@@ -55,6 +55,10 @@
             "Npgsql": {
               "target": "Package",
               "version": "[7.0.2, )"
+            },
+            "RichardSzalay.MockHttp": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             }
           },
           "imports": [
@@ -98,15 +102,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {
               "E:\\ETSU\\Grad\\CSCI\\5400 - Software Production\\Projects\\Deliverable 2\\sentiment-gui\\SentimentAnalysis\\SentimentAnalysis\\SentimentAnalysis.csproj": {
                 "projectPath": "E:\\ETSU\\Grad\\CSCI\\5400 - Software Production\\Projects\\Deliverable 2\\sentiment-gui\\SentimentAnalysis\\SentimentAnalysis\\SentimentAnalysis.csproj"
@@ -121,20 +125,24 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[16.11.0, )"
+              "version": "[17.5.0, )"
             },
             "NUnit": {
               "target": "Package",
-              "version": "[3.13.2, )"
+              "version": "[3.13.3, )"
             },
             "NUnit3TestAdapter": {
               "target": "Package",
-              "version": "[4.0.0, )"
+              "version": "[4.4.2, )"
+            },
+            "RichardSzalay.MockHttp": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             },
             "bunit": {
               "target": "Package",
@@ -144,7 +152,7 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.1.0, )"
+              "version": "[3.2.0, )"
             }
           },
           "imports": [
