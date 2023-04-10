@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[1.17.0, )"
             },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.3, )"
+            },
             "Npgsql": {
               "target": "Package",
               "version": "[7.0.2, )"
