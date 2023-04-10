@@ -61,7 +61,7 @@ else
 
     protected async Task ClassifyTextSentiment()
     {
-        StringBuilder sb = new StringBuilder("http://localhost:5001"); //When run as a container, change 'localhost' to your own IP so that it can connect to the containerized backend
+        StringBuilder sb = new StringBuilder("http://172.17.0.2:8000");
         if(!(InputSentence == string.Empty || InputSentence == "Type your text here..."))
         {
             sb.Append("/");

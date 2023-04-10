@@ -9,4 +9,3 @@ Then run:
 	
 # Using the container image
 With the container running, navigate to localhost/5000 to access the gui, functionality is available only when the containers for the database and analyzer are running
-In order to properly connect to the backend service, line 65 will need to be changed from building a connection string to localhost/5001 to {YOUR_IP}/5001 (e.g. 1.1.1.1/5001)
