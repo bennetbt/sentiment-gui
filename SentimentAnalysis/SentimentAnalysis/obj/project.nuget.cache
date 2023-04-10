@@ -1,12 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "SOPaVKIdfhJFeW3TtjfzVSzRPRhnCC96mFyfESW5TRSrWGvUm+IKg2KMuKkYtcdCN9ZkcNOEkgRQBb8pqVWVqA==",
+  "dgSpecHash": "9JbVIl4VdfPatAhBkJaejKm41gSw2Xtt/jnZO7BLSmkCkI1Fr+zpp56BoaM3AHelqQooBgabtyQHLfgyg6oBZw==",
   "success": true,
   "projectFilePath": "E:\\ETSU\\Grad\\CSCI\\5400 - Software Production\\Projects\\Deliverable 2\\sentiment-gui\\SentimentAnalysis\\SentimentAnalysis\\SentimentAnalysis.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\darie\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
-    "C:\\Users\\darie\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512",
-    "C:\\Users\\darie\\.nuget\\packages\\npgsql\\7.0.2\\npgsql.7.0.2.nupkg.sha512"
+    "C:\\Users\\darie\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\darie\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.18.1\\microsoft.visualstudio.azure.containers.tools.targets.1.18.1.nupkg.sha512",
+    "C:\\Users\\darie\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
+    "C:\\Users\\darie\\.nuget\\packages\\npgsql\\7.0.2\\npgsql.7.0.2.nupkg.sha512",
+    "C:\\Users\\darie\\.nuget\\packages\\nunit\\3.13.3\\nunit.3.13.3.nupkg.sha512",
+    "C:\\Users\\darie\\.nuget\\packages\\richardszalay.mockhttp\\6.0.0\\richardszalay.mockhttp.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

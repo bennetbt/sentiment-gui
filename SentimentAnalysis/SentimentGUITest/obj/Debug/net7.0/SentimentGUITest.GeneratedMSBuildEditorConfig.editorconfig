@@ -1,0 +1,25 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = SentimentGUITest
+build_property.RootNamespace = SentimentGUITest
+build_property.ProjectDir = E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentGUITest\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = E:\ETSU\Grad\CSCI\5400 - Software Production\Projects\Deliverable 2\sentiment-gui\SentimentAnalysis\SentimentGUITest
+build_property._RazorSourceGeneratorDebug = 
+
+[E:/ETSU/Grad/CSCI/5400 - Software Production/Projects/Deliverable 2/sentiment-gui/SentimentAnalysis/SentimentGUITest/SentimentHomeTest.razor]
+build_metadata.AdditionalFiles.TargetPath = U2VudGltZW50SG9tZVRlc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/ETSU/Grad/CSCI/5400 - Software Production/Projects/Deliverable 2/sentiment-gui/SentimentAnalysis/SentimentGUITest/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
