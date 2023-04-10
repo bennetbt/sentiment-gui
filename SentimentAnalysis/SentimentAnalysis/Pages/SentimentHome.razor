@@ -61,7 +61,7 @@ else
 
     protected async Task ClassifyTextSentiment()
     {
-        StringBuilder sb = new StringBuilder("http://172.20.0.2:8000");
+        StringBuilder sb = new StringBuilder("http://analyzer:8000");
         if(!(InputSentence == string.Empty || InputSentence == "Type your text here..."))
         {
             sb.Append("/");
