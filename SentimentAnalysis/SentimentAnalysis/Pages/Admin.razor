@@ -16,6 +16,34 @@
 <textarea @bind="InputSentence" @bind:event="oninput" id="sentimentInput" rows="4" cols="50" placeholder="Type your text here..."></textarea>
 <button class="btn btn-primary" @onclick="ClassifyTextSentiment">Classify Text</button>
 
+@if (sentiments != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Avg. Sentiment</th>
+                <th>Num. Positive</th>
+                <th>Percent Positive</th>
+                <th>Num. Negative</th>
+                <th>Percent Negative</th>
+                <th>Num. Neutral</th>
+                <th>Percent Neutral</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@averageSentiment</td>
+                <td>@positiveCount</td>
+                <td>@positivePercent</td>
+                <td>@negativeCount</td>
+                <td>@negativePercent</td>
+                <td>@neutralCount</td>
+                <td>@neutralPercent</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
 <div id="sentimentOutputSection"></div>
 @if (sentiments == null)
 {
@@ -56,14 +84,22 @@ else
     SentimentSet? sentiment;
     private bool getSentimentsError;
     private bool sentimentsLive = false;
+    private string averageSentiment = string.Empty;
+    private int positiveCount = 0;
+    private double positivePercent = 0.0;
+    private int negativeCount = 0;
+    private double negativePercent = 0.0;
+    private int neutralCount = 0;
+    private double neutralPercent = 0.0;
 
     public string InputSentence { get; set; } = string.Empty;
     public string DeletionIndex { get; set; } = string.Empty;
 
     protected async Task ClassifyTextSentiment()
     {
-        StringBuilder sb = new StringBuilder("http://analyzer:8000");
-        if(!(InputSentence == string.Empty || InputSentence == "Type your text here..."))
+        //StringBuilder sb = new StringBuilder("http://analyzer:8000");
+        StringBuilder sb = new StringBuilder("http://localhost:8000");
+        if (!(InputSentence == string.Empty || InputSentence == "Type your text here..."))
         {
             sb.Append("/");
             sb.Append(InputSentence);
@@ -89,6 +125,7 @@ else
             //reString = @"{""text"": ""This is the default sentence"", ""sentiment"": ""Neutral"", ""value"": 0.755}";
             sentiment = JsonSerializer.Deserialize<SentimentSet>(reString);
             sentiments.Add(sentiment);
+            Analysis(sentiment);
             sentimentsLive = true;
         }
         else
@@ -100,12 +137,40 @@ else
     private void DeleteSentiment()
     {
         int index;
-        if(Int32.TryParse(DeletionIndex, out index))
+        if (Int32.TryParse(DeletionIndex, out index))
         {
-            if(index >= 0 && index < sentiments.Count)
+            if (index >= 0 && index < sentiments.Count)
             {
                 sentiments.RemoveAt(index);
             }
+        }
+    }
+
+    private void Analysis(SentimentSet sentiment)
+    {
+        switch (sentiment.Sentiment)
+        {
+            case ("Positive"):
+                positiveCount++;
+                break;
+            case("Negative"):
+                negativeCount++;
+                break;
+            case("Neutral"):
+                neutralCount++;
+                break;
+        }
+        positivePercent = (double) ( (double) positiveCount / (double) sentiments.Count) * 100.0;
+        negativePercent = (double) ( (double) negativeCount / (double) sentiments.Count) * 100.0;
+        neutralPercent = (double) ( (double) neutralCount / (double) sentiments.Count) * 100.0;
+        averageSentiment = "Positive";
+        if(negativePercent > positivePercent)
+        {
+            averageSentiment = "Negative";
+        }
+        if(neutralPercent > negativePercent)
+        {
+            averageSentiment = "Neutral";
         }
     }
 }
