@@ -3,6 +3,7 @@
 @using System.Text
 @using System.Text.Json
 @using System.Text.Json.Serialization
+@inject NavigationManager Nav
 @inject IHttpClientFactory ClientFactory
 
 <PageTitle>Login</PageTitle>
@@ -34,7 +35,7 @@
     {
         if (String.Equals(Username, "admin") && String.Equals(Password, "password"))
         {
-
+            Nav.NavigateTo("/administration");
         }
         else
         {

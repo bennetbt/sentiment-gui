@@ -3,6 +3,7 @@
 @using System.Text
 @using System.Text.Json
 @using System.Text.Json.Serialization
+@inject NavigationManager Nav
 @inject IHttpClientFactory ClientFactory
 
 <PageTitle>Sentiment Analysis</PageTitle>
@@ -44,8 +45,6 @@ else
         </tbody>
     </table>
 
-    <textarea @bind="DeletionIndex" @bind:event="oninput" id="deletionChoice" rows="3" cols="15" placeholder="Enter row number here..."></textarea>
-    <button class="btn btn-primary" @onclick="DeleteSentiment">Delete Sentiment</button>
 }
 
 
@@ -57,7 +56,6 @@ else
     private bool sentimentsLive = false;
 
     public string InputSentence { get; set; } = string.Empty;
-    public string DeletionIndex { get; set; } = string.Empty;
 
     protected async Task ClassifyTextSentiment()
     {
@@ -93,18 +91,6 @@ else
         else
         {
             getSentimentsError = true;
-        }
-    }
-
-    private void DeleteSentiment()
-    {
-        int index;
-        if(Int32.TryParse(DeletionIndex, out index))
-        {
-            if(index >= 0 && index < sentiments.Count)
-            {
-                sentiments.RemoveAt(index);
-            }
         }
     }
 }
