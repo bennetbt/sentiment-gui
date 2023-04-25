@@ -1,0 +1,45 @@
+﻿@page "/login"
+@using SentimentAnalysis.Data
+@using System.Text
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@inject NavigationManager Nav
+@inject IHttpClientFactory ClientFactory
+
+<PageTitle>Login</PageTitle>
+
+<h1>Login</h1>
+
+@if (loginAttempted == true)
+{
+<div class="message">Sorry, That login is incorrect</div>
+}
+<form class="login-form" method="post" action="{{ url_for('login') }}">
+    <label>Username:</label>
+    <input @bind="Username" type="email" id="username" name="username" required />
+
+    <label>Password:</label>
+    <input @bind="Password" type="password" id="password" name="password" required />
+
+    <input type="submit" @onclick="ProcessLogin" value="Submit" />
+    <!-- <input type="hidden" name="did_login" value="true" /> -->
+</form>
+
+@code {
+    bool loginAttempted = false;
+
+    public string Username { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
+
+    private void ProcessLogin()
+    {
+        if (String.Equals(Username, "admin") && String.Equals(Password, "password"))
+        {
+            Nav.NavigateTo("/administration");
+        }
+        else
+        {
+            loginAttempted = true;
+        }
+    }
+}
