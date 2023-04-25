@@ -9,102 +9,36 @@
 
 <h1>Login</h1>
 
-<p>Enter text into the first text box to classify it based on the estimated sentiment</p>
-
-<div id="inputSection"></div>
-<textarea @bind="InputSentence" @bind:event="oninput" id="sentimentInput" rows="4" cols="50" placeholder="Type your text here..."></textarea>
-<button class="btn btn-primary" @onclick="ClassifyTextSentiment">Classify Text</button>
-
-<div id="sentimentOutputSection"></div>
-@if (sentiments == null)
+@if (loginAttempted == true)
 {
-    <p><em>Loading...</em></p>
+<div class="message">Sorry, That login is incorrect</div>
 }
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Row</th>
-                <th>Text</th>
-                <th>Sentiment</th>
-                <th>Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var sentiment in sentiments)
-            {
-                <tr>
-                    <td>@sentiments.IndexOf(sentiment)</td>
-                    <td>@sentiment.Text</td>
-                    <td>@sentiment.Sentiment</td>
-                    <td>@sentiment.Value</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<form class="login-form" method="post" action="{{ url_for('login') }}">
+    <label>Username:</label>
+    <input @bind="Username" type="email" id="username" name="username" required />
 
-    <textarea @bind="DeletionIndex" @bind:event="oninput" id="deletionChoice" rows="3" cols="15" placeholder="Enter row number here..."></textarea>
-    <button class="btn btn-primary" @onclick="DeleteSentiment">Delete Sentiment</button>
-}
+    <label>Password:</label>
+    <input @bind="Password" type="password" id="password" name="password" required />
 
-
+    <input type="submit" @onclick="ProcessLogin" value="Submit" />
+    <!-- <input type="hidden" name="did_login" value="true" /> -->
+</form>
 
 @code {
-    private List<SentimentSet>? sentiments = null;
-    SentimentSet? sentiment;
-    private bool getSentimentsError;
-    private bool sentimentsLive = false;
+    bool loginAttempted = false;
 
-    public string InputSentence { get; set; } = string.Empty;
-    public string DeletionIndex { get; set; } = string.Empty;
+    public string Username { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
 
-    protected async Task ClassifyTextSentiment()
+    private void ProcessLogin()
     {
-        StringBuilder sb = new StringBuilder("http://analyzer:8000");
-        if(!(InputSentence == string.Empty || InputSentence == "Type your text here..."))
+        if (String.Equals(Username, "admin") && String.Equals(Password, "password"))
         {
-            sb.Append("/");
-            sb.Append(InputSentence);
-        }
-        string analyzerConnection = sb.ToString();
-        var request = new HttpRequestMessage(HttpMethod.Get, analyzerConnection);
-        request.Headers.Add("Accept", "application/json");
 
-        var client = ClientFactory.CreateClient();
-
-        var response = await client.SendAsync(request);
-
-        if (response.IsSuccessStatusCode)
-        {
-            if (!sentimentsLive)
-            {
-                sentiments = new List<SentimentSet>();
-            }
-            var responseStream = await response.Content.ReadAsStringAsync();
-            string reString = responseStream.Replace(@"\", String.Empty);
-            reString = reString.Remove(0, 1);
-            reString = reString.Remove(reString.Length - 1, 1);
-            //reString = @"{""text"": ""This is the default sentence"", ""sentiment"": ""Neutral"", ""value"": 0.755}";
-            sentiment = JsonSerializer.Deserialize<SentimentSet>(reString);
-            sentiments.Add(sentiment);
-            sentimentsLive = true;
         }
         else
         {
-            getSentimentsError = true;
-        }
-    }
-
-    private void DeleteSentiment()
-    {
-        int index;
-        if(Int32.TryParse(DeletionIndex, out index))
-        {
-            if(index >= 0 && index < sentiments.Count)
-            {
-                sentiments.RemoveAt(index);
-            }
+            loginAttempted = true;
         }
     }
 }
