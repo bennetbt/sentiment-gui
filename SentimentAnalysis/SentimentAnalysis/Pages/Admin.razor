@@ -5,6 +5,7 @@
 @using System.Text.Json.Serialization
 @inject NavigationManager Nav
 @inject IHttpClientFactory ClientFactory
+@inject Services.AppData AppData
 
 <PageTitle>Sentiment Administration</PageTitle>
 
@@ -106,6 +107,15 @@ else
     public string ModSentiment { get; set; } = string.Empty;
 
     protected bool IsReadOnly { get; set; } = false;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (AppData.LoggedIn != true)
+        {
+            Nav.NavigateTo("/login");
+        }
+        base.OnAfterRender(firstRender);
+    }
 
     protected async Task ClassifyTextSentiment()
     {
