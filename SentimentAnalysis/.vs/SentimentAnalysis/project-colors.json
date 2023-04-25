@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "4ab7318b-48d0-438a-a561-aaaac35ce1b1": {
+      "ProjectGuid": "4ab7318b-48d0-438a-a561-aaaac35ce1b1",
+      "DisplayName": "SentimentAnalysis",
+      "ColorIndex": 0
+    },
+    "2dab67ef-5930-45f4-abc0-e66366cedb81": {
+      "ProjectGuid": "2dab67ef-5930-45f4-abc0-e66366cedb81",
+      "DisplayName": "SentimentGUITest",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
