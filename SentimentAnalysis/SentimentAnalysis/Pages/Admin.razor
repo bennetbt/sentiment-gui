@@ -5,6 +5,7 @@
 @using System.Text.Json.Serialization
 @inject NavigationManager Nav
 @inject IHttpClientFactory ClientFactory
+@inject Services.AppData AppData
 
 <PageTitle>Sentiment Administration</PageTitle>
 
@@ -73,8 +74,16 @@ else
         </tbody>
     </table>
 
-    <textarea @bind="DeletionIndex" @bind:event="oninput" id="deletionChoice" rows="3" cols="15" placeholder="Enter row number here..."></textarea>
+    <textarea @bind="ModIndex" @bind:event="oninput" id="modificationChoice" rows="3" cols="15" readonly="@IsReadOnly" placeholder="Enter row number here..."></textarea>
     <button class="btn btn-primary" @onclick="DeleteSentiment">Delete Sentiment</button>
+    <button class="btn btn-primary" @onclick="EditSentiment">Edit Sentiment</button>
+
+    @if(editing == true)
+    {
+        <textarea @bind="ModSentiment" @bind:event="oninput" id="sentimentModification" rows="3" cols="15" placeholder="@sentiments[Int32.Parse(ModIndex)].Sentiment"></textarea>
+        <button class="btn btn-primary" @onclick="FinalizeEdit">OK</button>
+        <button class="btn btn-primary" @onclick="CancelEdit">Cancel</button>
+    }
 }
 
 
@@ -83,6 +92,7 @@ else
     private List<SentimentSet>? sentiments = null;
     SentimentSet? sentiment;
     private bool getSentimentsError;
+    private bool editing = false;
     private bool sentimentsLive = false;
     private string averageSentiment = string.Empty;
     private int positiveCount = 0;
@@ -93,12 +103,24 @@ else
     private double neutralPercent = 0.0;
 
     public string InputSentence { get; set; } = string.Empty;
-    public string DeletionIndex { get; set; } = string.Empty;
+    public string ModIndex { get; set; } = string.Empty;
+    public string ModSentiment { get; set; } = string.Empty;
+
+    protected bool IsReadOnly { get; set; } = false;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (AppData.LoggedIn != true)
+        {
+            Nav.NavigateTo("/login");
+        }
+        base.OnAfterRender(firstRender);
+    }
 
     protected async Task ClassifyTextSentiment()
     {
-        StringBuilder sb = new StringBuilder("http://analyzer:8000");
-       //StringBuilder sb = new StringBuilder("http://localhost:8000");
+        //StringBuilder sb = new StringBuilder("http://analyzer:8000");
+        StringBuilder sb = new StringBuilder("http://localhost:8000");
         if (!(InputSentence == string.Empty || InputSentence == "Type your text here..."))
         {
             sb.Append("/");
@@ -125,7 +147,7 @@ else
             //reString = @"{""text"": ""This is the default sentence"", ""sentiment"": ""Neutral"", ""value"": 0.755}";
             sentiment = JsonSerializer.Deserialize<SentimentSet>(reString);
             sentiments.Add(sentiment);
-            Analysis(sentiment);
+            Analysis();
             sentimentsLive = true;
         }
         else
@@ -137,28 +159,73 @@ else
     private void DeleteSentiment()
     {
         int index;
-        if (Int32.TryParse(DeletionIndex, out index))
+        if (Int32.TryParse(ModIndex, out index))
         {
             if (index >= 0 && index < sentiments.Count)
             {
                 sentiments.RemoveAt(index);
+                Analysis();
             }
         }
     }
 
-    private void Analysis(SentimentSet sentiment)
+    private void EditSentiment()
     {
-        switch (sentiment.Sentiment)
+        int index;
+        if(Int32.TryParse(ModIndex, out index))
         {
-            case ("Positive"):
-                positiveCount++;
-                break;
-            case("Negative"):
-                negativeCount++;
-                break;
-            case("Neutral"):
-                neutralCount++;
-                break;
+            if (index >= 0 && index < sentiments.Count)
+            {
+                ModSentiment = sentiments[index].Sentiment;
+                editing = true;
+                IsReadOnly = true;
+            }
+        }
+    }
+
+    private void FinalizeEdit()
+    {
+        string newSentiment = ModSentiment;
+        if (newSentiment != "Positive" && newSentiment != "Negative" && newSentiment != "Neutral")
+        {
+            editing = true;
+        }
+        else
+        {
+            sentiments[Int32.Parse(ModIndex)].Sentiment = newSentiment;
+            editing = false;
+            IsReadOnly = false;
+        }
+        Analysis();
+    }
+
+    private void CancelEdit()
+    {
+        editing = false;
+        IsReadOnly = false;
+        ModSentiment = String.Empty;
+        Analysis();
+    }
+
+    private void Analysis()
+    {
+        positiveCount = 0;
+        negativeCount = 0;
+        neutralCount = 0;
+        foreach(SentimentSet s in sentiments)
+        {
+            switch (s.Sentiment)
+            {
+                case ("Positive"):
+                    positiveCount++;
+                    break;
+                case ("Negative"):
+                    negativeCount++;
+                    break;
+                case ("Neutral"):
+                    neutralCount++;
+                    break;
+            }
         }
         positivePercent = (double) ( (double) positiveCount / (double) sentiments.Count) * 100.0;
         negativePercent = (double) ( (double) negativeCount / (double) sentiments.Count) * 100.0;

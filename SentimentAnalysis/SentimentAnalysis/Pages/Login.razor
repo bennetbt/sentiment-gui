@@ -5,6 +5,7 @@
 @using System.Text.Json.Serialization
 @inject NavigationManager Nav
 @inject IHttpClientFactory ClientFactory
+@inject Services.AppData AppData
 
 <PageTitle>Login</PageTitle>
 
@@ -35,11 +36,13 @@
     {
         if (String.Equals(Username, "admin") && String.Equals(Password, "password"))
         {
+            AppData.LoggedIn = true;
             Nav.NavigateTo("/administration");
         }
         else
         {
             loginAttempted = true;
+            AppData.LoggedIn = false;
         }
     }
 }
