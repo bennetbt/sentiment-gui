@@ -17,7 +17,7 @@
 <textarea @bind="InputSentence" @bind:event="oninput" id="sentimentInput" rows="4" cols="50" placeholder="Type your text here..."></textarea>
 <button class="btn btn-primary" @onclick="ClassifyTextSentiment">Classify Text</button>
 
-@if (sentiments != null)
+@if (sentimentsLive == true)
 {
     <table class="table">
         <thead>
@@ -46,9 +46,9 @@
 }
 
 <div id="sentimentOutputSection"></div>
-@if (sentiments == null)
+@if (sentimentsLive == false)
 {
-    <p><em>Loading...</em></p>
+    <p><em>No sentiments exist...</em></p>
 }
 else
 {
@@ -62,10 +62,10 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var sentiment in sentiments)
+            @foreach (var sentiment in AppData.Sentiments)
             {
                 <tr>
-                    <td>@sentiments.IndexOf(sentiment)</td>
+                    <td>@AppData.Sentiments.IndexOf(sentiment)</td>
                     <td>@sentiment.Text</td>
                     <td>@sentiment.Sentiment</td>
                     <td>@sentiment.Value</td>
@@ -80,7 +80,7 @@ else
 
     @if(editing == true)
     {
-        <textarea @bind="ModSentiment" @bind:event="oninput" id="sentimentModification" rows="3" cols="15" placeholder="@sentiments[Int32.Parse(ModIndex)].Sentiment"></textarea>
+        <textarea @bind="ModSentiment" @bind:event="oninput" id="sentimentModification" rows="3" cols="15" placeholder="@AppData.Sentiments[Int32.Parse(ModIndex)].Sentiment"></textarea>
         <button class="btn btn-primary" @onclick="FinalizeEdit">OK</button>
         <button class="btn btn-primary" @onclick="CancelEdit">Cancel</button>
     }
@@ -89,7 +89,6 @@ else
 
 
 @code {
-    private List<SentimentSet>? sentiments = null;
     SentimentSet? sentiment;
     private bool getSentimentsError;
     private bool editing = false;
@@ -110,6 +109,15 @@ else
 
     protected override void OnAfterRender(bool firstRender)
     {
+        if (AppData.Sentiments.Count > 0)
+        {
+            Analysis();
+            sentimentsLive = true;
+        }
+        else
+        {
+            sentimentsLive = false;
+        }
         if (AppData.LoggedIn != true)
         {
             Nav.NavigateTo("/login");
@@ -119,8 +127,8 @@ else
 
     protected async Task ClassifyTextSentiment()
     {
-        //StringBuilder sb = new StringBuilder("http://analyzer:8000");
-        StringBuilder sb = new StringBuilder("http://localhost:8000");
+        StringBuilder sb = new StringBuilder("http://analyzer:8000");
+        //StringBuilder sb = new StringBuilder("http://localhost:8000");
         if (!(InputSentence == string.Empty || InputSentence == "Type your text here..."))
         {
             sb.Append("/");
@@ -136,17 +144,13 @@ else
 
         if (response.IsSuccessStatusCode)
         {
-            if (!sentimentsLive)
-            {
-                sentiments = new List<SentimentSet>();
-            }
             var responseStream = await response.Content.ReadAsStringAsync();
             string reString = responseStream.Replace(@"\", String.Empty);
             reString = reString.Remove(0, 1);
             reString = reString.Remove(reString.Length - 1, 1);
             //reString = @"{""text"": ""This is the default sentence"", ""sentiment"": ""Neutral"", ""value"": 0.755}";
             sentiment = JsonSerializer.Deserialize<SentimentSet>(reString);
-            sentiments.Add(sentiment);
+            AppData.Sentiments.Add(sentiment);
             Analysis();
             sentimentsLive = true;
         }
@@ -161,9 +165,9 @@ else
         int index;
         if (Int32.TryParse(ModIndex, out index))
         {
-            if (index >= 0 && index < sentiments.Count)
+            if (index >= 0 && index < AppData.Sentiments.Count)
             {
-                sentiments.RemoveAt(index);
+                AppData.Sentiments.RemoveAt(index);
                 Analysis();
             }
         }
@@ -174,9 +178,9 @@ else
         int index;
         if(Int32.TryParse(ModIndex, out index))
         {
-            if (index >= 0 && index < sentiments.Count)
+            if (index >= 0 && index < AppData.Sentiments.Count)
             {
-                ModSentiment = sentiments[index].Sentiment;
+                ModSentiment = AppData.Sentiments[index].Sentiment;
                 editing = true;
                 IsReadOnly = true;
             }
@@ -192,7 +196,7 @@ else
         }
         else
         {
-            sentiments[Int32.Parse(ModIndex)].Sentiment = newSentiment;
+            AppData.Sentiments[Int32.Parse(ModIndex)].Sentiment = newSentiment;
             editing = false;
             IsReadOnly = false;
         }
@@ -212,7 +216,7 @@ else
         positiveCount = 0;
         negativeCount = 0;
         neutralCount = 0;
-        foreach(SentimentSet s in sentiments)
+        foreach(SentimentSet s in AppData.Sentiments)
         {
             switch (s.Sentiment)
             {
@@ -227,9 +231,9 @@ else
                     break;
             }
         }
-        positivePercent = (double) ( (double) positiveCount / (double) sentiments.Count) * 100.0;
-        negativePercent = (double) ( (double) negativeCount / (double) sentiments.Count) * 100.0;
-        neutralPercent = (double) ( (double) neutralCount / (double) sentiments.Count) * 100.0;
+        positivePercent = (double) ( (double) positiveCount / (double) AppData.Sentiments.Count) * 100.0;
+        negativePercent = (double) ( (double) negativeCount / (double) AppData.Sentiments.Count) * 100.0;
+        neutralPercent = (double) ( (double) neutralCount / (double) AppData.Sentiments.Count) * 100.0;
         averageSentiment = "Positive";
         if(negativePercent > positivePercent)
         {
