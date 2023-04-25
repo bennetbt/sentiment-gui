@@ -12,6 +12,7 @@ Learn more at https://bunit.dev/docs/getting-started/writing-tests.html#creating
 	{
 		// Arrange
 		Services.AddHttpClient();
+		Services.AddSingleton<AppData>();
 		var cut = Render(@<SentimentHome />);
 
 		//Assert that the content of the header is 'Sentiment Analysis'
