@@ -5,6 +5,7 @@
 @using System.Text.Json.Serialization
 @inject NavigationManager Nav
 @inject IHttpClientFactory ClientFactory
+@inject Services.AppData AppData
 
 <PageTitle>Sentiment Analysis</PageTitle>
 
@@ -17,9 +18,9 @@
 <button class="btn btn-primary" @onclick="ClassifyTextSentiment">Classify Text</button>
 
 <div id="sentimentOutputSection"></div>
-@if (sentiments == null)
+@if (sentimentsLive == false)
 {
-    <p><em>Loading...</em></p>
+    <p><em>No sentiments exist...</em></p>
 }
 else
 {
@@ -33,10 +34,10 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var sentiment in sentiments)
+            @foreach (var sentiment in AppData.Sentiments)
             {
                 <tr>
-                    <td>@sentiments.IndexOf(sentiment)</td>
+                    <td>@AppData.Sentiments.IndexOf(sentiment)</td>
                     <td>@sentiment.Text</td>
                     <td>@sentiment.Sentiment</td>
                     <td>@sentiment.Value</td>
@@ -50,12 +51,24 @@ else
 
 
 @code {
-    private List<SentimentSet>? sentiments = null;
     SentimentSet? sentiment;
     private bool getSentimentsError;
     private bool sentimentsLive = false;
 
     public string InputSentence { get; set; } = string.Empty;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (AppData.Sentiments.Count > 0)
+        {
+            sentimentsLive = true;
+        }
+        else
+        {
+            sentimentsLive = false;
+        }
+        base.OnAfterRender(firstRender);
+    }
 
     protected async Task ClassifyTextSentiment()
     {
@@ -76,17 +89,13 @@ else
 
         if (response.IsSuccessStatusCode)
         {
-            if (!sentimentsLive)
-            {
-                sentiments = new List<SentimentSet>();
-            }
             var responseStream = await response.Content.ReadAsStringAsync();
             string reString = responseStream.Replace(@"\", String.Empty);
             reString = reString.Remove(0, 1);
             reString = reString.Remove(reString.Length - 1, 1);
             //reString = @"{""text"": ""This is the default sentence"", ""sentiment"": ""Neutral"", ""value"": 0.755}";
             sentiment = JsonSerializer.Deserialize<SentimentSet>(reString);
-            sentiments.Add(sentiment);
+            AppData.Sentiments.Add(sentiment);
             sentimentsLive = true;
         }
         else
